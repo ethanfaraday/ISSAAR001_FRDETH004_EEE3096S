@@ -46,6 +46,7 @@ TIM_HandleTypeDef htim16;
 // TODO: Define input variables
 // Define the pattern number variable
 volatile uint8_t patternNumber = 0;
+volatile uint8_t patternNumber = 1;
 
 // Define the LED patterns
 uint8_t ledPatterns[9][8] = {
