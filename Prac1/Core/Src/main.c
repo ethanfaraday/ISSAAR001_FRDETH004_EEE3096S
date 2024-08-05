@@ -46,10 +46,9 @@ TIM_HandleTypeDef htim16;
 // TODO: Define input variables
 // Define the pattern number variable
 volatile uint8_t patternNumber = 0;
-volatile uint8_t patternNumber = 1;
 
 // Define the LED patterns
-uint8_t ledPatterns[9][8] = {
+uint8_t ledPatterns[8][7] = {
     {1, 1, 1, 0, 1, 0, 0, 1},  // Pattern 1
     {1, 1, 0, 1, 0, 0, 1, 0},  // Pattern 2
     {1, 0, 1, 0, 0, 1, 0, 0},  // Pattern 3
@@ -118,10 +117,12 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
     // TODO: Check pushbuttons to change timer delay
-    
-    
-
-  }
+	  TIM16_IRQHandler();
+	  if (HAL_GPIO_ReadPin(Button0_GPIO_Port, Button0_Pin)){
+	  }else if (HAL_GPIO_ReadPin(Button1_GPIO_Port, Button1_Pin)){
+	  }else if (HAL_GPIO_ReadPin(Button2_GPIO_Port, Button2_Pin)){
+	  }else if (HAL_GPIO_ReadPin(Button3_GPIO_Port, Button3_Pin)){
+	  }
   /* USER CODE END 3 */
 }
 
@@ -332,7 +333,9 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void setLEDs(uint8_t *pattern){
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, pattern[0]);
+}
 // Timer rolled over
 void TIM16_IRQHandler(void)
 {
@@ -340,11 +343,12 @@ void TIM16_IRQHandler(void)
 	HAL_TIM_IRQHandler(&htim16);
 
 	// TODO: Change LED pattern
+	HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
+
 	// print something
 
   
 }
-
 /* USER CODE END 4 */
 
 /**
