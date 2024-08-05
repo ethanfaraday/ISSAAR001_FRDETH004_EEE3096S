@@ -44,8 +44,21 @@ TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
 // TODO: Define input variables
-uint8_t variable =0;
+// Define the pattern number variable
+volatile uint8_t patternNumber = 0;
 
+// Define the LED patterns
+uint8_t ledPatterns[9][8] = {
+    {1, 1, 1, 0, 1, 0, 0, 1},  // Pattern 1
+    {1, 1, 0, 1, 0, 0, 1, 0},  // Pattern 2
+    {1, 0, 1, 0, 0, 1, 0, 0},  // Pattern 3
+    {0, 1, 0, 0, 1, 0, 0, 0},  // Pattern 4
+    {1, 0, 0, 1, 0, 0, 0, 0},  // Pattern 5
+    {0, 0, 1, 0, 0, 0, 0, 0},  // Pattern 6
+    {0, 1, 0, 0, 0, 0, 0, 0},  // Pattern 7
+    {1, 0, 0, 0, 0, 0, 0, 0},  // Pattern 8
+    {0, 0, 0, 0, 0, 0, 0, 0}   // Pattern 9
+};
 
 /* USER CODE END PV */
 
@@ -92,7 +105,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   // TODO: Start timer TIM16
-
+  HAL_TIM_Base_Start_IT(&htim16);
   /* USER CODE END 2 */
 
   /* Infinite loop */
