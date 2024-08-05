@@ -44,6 +44,7 @@ TIM_HandleTypeDef htim16;
 
 /* USER CODE BEGIN PV */
 // TODO: Define input variables
+uint8_t variable =0;
 
 
 /* USER CODE END PV */
