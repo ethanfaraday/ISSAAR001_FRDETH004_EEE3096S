@@ -337,8 +337,15 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void setLEDs(uint8_t *pattern){
+void changeLEDs(uint8_t *pattern){
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, pattern[0]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, pattern[1]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, pattern[2]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, pattern[3]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, pattern[4]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, pattern[5]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, pattern[6]);
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_7, pattern[7]);
 }
 // Timer rolled over
 void TIM16_IRQHandler(void)
@@ -347,11 +354,11 @@ void TIM16_IRQHandler(void)
 	HAL_TIM_IRQHandler(&htim16);
 
 	// TODO: Change LED pattern
-	HAL_GPIO_TogglePin(LED1_GPIO_Port, LED1_Pin);
-
+	_HAL_TIM_CLEAR_IT(&htim16,TIM_IT_Update); //Clears Interrupt flags
 	// print something
 
-  
+	patternNumber = (patternNumber+1)%9; //Counts to 9 and resets to 0 after it reaches 9.
+	changeLeds(ledPatterns[patternNumber]);
 }
 /* USER CODE END 4 */
 
