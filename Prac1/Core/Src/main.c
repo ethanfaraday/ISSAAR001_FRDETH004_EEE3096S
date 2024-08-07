@@ -119,9 +119,13 @@ int main(void)
     // TODO: Check pushbuttons to change timer delay
 	  TIM16_IRQHandler();
 	  if (HAL_GPIO_ReadPin(Button0_GPIO_Port, Button0_Pin)){
+		  htim16.Init.Period = 500-1 ;
 	  }else if (HAL_GPIO_ReadPin(Button1_GPIO_Port, Button1_Pin)){
+		  htim16.Init.Period = 2000-1;
 	  }else if (HAL_GPIO_ReadPin(Button2_GPIO_Port, Button2_Pin)){
+		  htim16.Init.Period = 1000-1
 	  }else if (HAL_GPIO_ReadPin(Button3_GPIO_Port, Button3_Pin)){
+		patternNumber = 0;
 	  }
   /* USER CODE END 3 */
 }
